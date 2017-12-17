@@ -48,13 +48,9 @@ chmod 755 adxv.x86_64CentOS6
 ###adxv##
 
 
-emacs bashProfile
-PATH=$PATH:/home/hikida/soft/XDS-INTEL64_Linux_x86_64/
+#emacs bashProfile
+#PATH=$PATH:/home/hikida/soft/XDS-INTEL64_Linux_x86_64/
 #source /home/hikida/soft/ccp4-7.0/bin/ccp4.setup-sh 
 #source /home/hikida/soft/phenix-1.12-2829/phenix_env.sh
 
-
-
-
-
-
+#TODO: setup PATH
