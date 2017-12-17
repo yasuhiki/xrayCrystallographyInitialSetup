@@ -1,3 +1,4 @@
+#!/bin/bash
 #azure 新規作成
 #Centos 6.8を選択
 #$ cat /etc/redhat-release 
