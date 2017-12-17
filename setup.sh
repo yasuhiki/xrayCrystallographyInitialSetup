@@ -1,5 +1,7 @@
 #azure 新規作成
 #Centos 6.8を選択
+#$ cat /etc/redhat-release 
+#CentOS release 6.8 (Final)
 
 sudo yum install epel-release -y#いらないかもしれない
 sudo yum groupinstall "X Window System" -y
