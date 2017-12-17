@@ -53,5 +53,77 @@ sudo mv adxv.x86_64CentOS6 /usr/local/bin
 #PATH=$PATH:$HOME/soft/XDS-INTEL64_Linux_x86_64/
 #source $HOME/soft/ccp4-7.0/bin/ccp4.setup-sh 
 #source $HOME/soft/phenix-1.12-2829/phenix_env.sh
+#source $HOME/soft/dials-v1-8-2/dials_env.sh
+
+
 
 #TODO: setup PATH
+
+
+
+##KAMO install###phenix依存#
+#以下参照
+#https://github.com/keitaroyam/yamtbx/blob/master/doc/eiger-ja.md#eiger2cbf-h5toxds%E4%BA%92%E6%8F%9B
+mkdir eiger
+cd eiger
+curl -O https://www.mrc-lmb.cam.ac.uk/harry/imosflm/ver721/downloads/eiger2cbf-linux.zip
+unzip eiger2cbf-linux.zip 
+
+cd (任意のPATHが通った場所)
+cat <<+ > H5ToXds
+#!/bin/sh
+eiger2cbf $@ 2>/dev/null
++
+chmod +x H5ToXds
+
+##XDSSTAT##https://strucbio.biologie.uni-konstanz.de/xdswiki/index.php/Installation
+sudo yum install R R-core -y
+sudo R #Rを起動
+#> install.packages("rjson")
+#38 Japanサーバー選択など
+#> quit()
+curl -L -o xdsstat.bz2 ftp://turn5.biologie.uni-konstanz.de/pub/xdsstat-linux64.bz2
+bunzip2 -f xdsstat.bz2
+chmod a+x xdsstat
+#ブラウザダウンロード https://github.com/dials/dials/releases/download/v1.8.0/dials-v1-8-2-linux-x86_64.tar.xz
+#wget http://dials.diamond.ac.uk/diamond_builds/dials-linux-x86_64.tar.xz #でできるかも。
+tar xf dials-v1-8-2-linux-x86_64.tar.xz 
+cd  dials-installer/
+./install --prefix=/home/hikida/soft/
+#source bashProfile
+cd $PHENIX/build##phenix環境変数設定済みを仮定
+./bin/libtbx.python -m easy_install networkx==1.11
+sudo yum install lapack-devel lapack -y
+./bin/libtbx.python -m easy_install scipy==0.18.1
+sudo yum install git
+cd $HOME
+git clone https://github.com/keitaroyam/yamtbx.git
+cd $PHENIX/modules
+ln -s ~/yamtbx/yamtbx .
+cd ../build
+./bin/libtbx.configure yamtbx
+###KAMO###
+##TODO:
+##KAMOテストデータを用意する
+##########
+
+
+
+
+#X線テストデータセット
+#curl -O http://www.helmholtz-
+
+berlin.de/media/media/grossgeraete/mi_synchro/bessy_mx/tutorial/exp1_ins_ssad/data/exp1_data1.tgz
+#curl -Ohttp://www.helmholtz-
+
+berlin.de/media/media/grossgeraete/mi_synchro/bessy_mx/tutorial/exp1_ins_ssad/data/exp1_data2.tgz
+
+#tar xzvf exp1_data1.tgz
+#tar xzvf exp1_data2.tgz
+#cd exp1/data
+#mkdir XDS
+#cd XDS
+#generate_XDS.INP "../exp1_ins_ssad_???.img.bz2"   #XDS.INPというファイルが生成される
+#xds_par #いろいろなファイルが生成される、5分くらい時間がかかる
+#XDS_ASCII.HKLを次に使う
+#phenix(GUI or CUI)でいろいろやる
