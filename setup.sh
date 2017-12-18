@@ -111,12 +111,8 @@ cd ../build
 
 
 #X線テストデータセット
-#curl -O http://www.helmholtz-
-
-berlin.de/media/media/grossgeraete/mi_synchro/bessy_mx/tutorial/exp1_ins_ssad/data/exp1_data1.tgz
-#curl -Ohttp://www.helmholtz-
-
-berlin.de/media/media/grossgeraete/mi_synchro/bessy_mx/tutorial/exp1_ins_ssad/data/exp1_data2.tgz
+#curl -O http://www.helmholtz-berlin.de/media/media/grossgeraete/mi_synchro/bessy_mx/tutorial/exp1_ins_ssad/data/exp1_data1.tgz
+#curl -O http://www.helmholtz-berlin.de/media/media/grossgeraete/mi_synchro/bessy_mx/tutorial/exp1_ins_ssad/data/exp1_data2.tgz
 
 #tar xzvf exp1_data1.tgz
 #tar xzvf exp1_data2.tgz
@@ -126,4 +122,8 @@ berlin.de/media/media/grossgeraete/mi_synchro/bessy_mx/tutorial/exp1_ins_ssad/da
 #generate_XDS.INP "../exp1_ins_ssad_???.img.bz2"   #XDS.INPというファイルが生成される
 #xds_par #いろいろなファイルが生成される、5分くらい時間がかかる
 #XDS_ASCII.HKLを次に使う
+#出力結果が手元で実行したときと同じかどうかで判断するtest case追加、(簡易チェック:ファイルが生成されていればOK)
+###test####
+#if [ -e XDS_ASCII.HKL ]; then echo XDS_OK; else  echo XDS_error; fi
+###########
 #phenix(GUI or CUI)でいろいろやる
